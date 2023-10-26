@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -24,14 +23,15 @@ switch(ch)
     case 1:
     {
         printf("Enter the infix expression\n");
-        scanf("%s",&exp_n);
+        scanf("%s",exp_n);
         POSTFIX();
         break;
     }
     case 2:
     {
-        printf("Enter the postfix expression\n");
-        scanf("%s",&post_fix);
+    printf("Enter the infix expression\n");
+        scanf("%s",exp_n);
+        POSTFIX();
         result=Evaluate();
         printf("The evaluation result of postfix expression\n");
         printf("%d\n",result);
@@ -53,14 +53,9 @@ void Push(char x)
 int Pop()
 {
     int item;
-    if(top==-1)
-    printf("Stack is Empty\n");
-    else
-    {
-        item=stack[top];
-        top=top-1;
-        return item;
-    }
+    item=stack[top];
+    top=top-1;
+    return item;
 }
 void POSTFIX()
 {
@@ -192,6 +187,8 @@ int Evaluate()
     } }
     return stack[0];
 }
+
+
 
 
 
