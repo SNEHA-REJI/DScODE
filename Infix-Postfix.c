@@ -13,7 +13,6 @@ int Pop();
 void main()
 {
 int ch;
-printf("Name:Kesiya Mariam Reji\nBranch:CS-B\nRoll No.:54\n");
 printf("MENU\n");
 printf("1.Convert Infix to Postfix\n");
 printf("2.Evaluate Postfix Expression\n");
