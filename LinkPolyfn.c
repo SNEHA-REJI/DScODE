@@ -18,7 +18,7 @@ void main()
     printf("1.Enter Polynomial 1 & Display\n");
     printf("2.Enter Polynomial 2 & Display\n");
     printf("3.Perform Polynomial Addition\n");
-    printf("3.Perform Polynomial Addition\n");
+    printf("3.Perform Polynomial Multiplication\n");
     printf("5.EXIT\n");
     printf("Enter the choice\n");
     scanf("%d",&ch);
