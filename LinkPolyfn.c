@@ -2,263 +2,304 @@
 #include<stdlib.h>
 struct node
 {
-    int coeff;
-    int expo;
-    struct node *next;
+    int data;
+    struct node *next;
 };
-struct node *p,*q,*r,*head1,*head2,*head3,*tail1,*tail2,*tail3,*ptr,*prev;
+struct node *p,*top,*front,*rear,*temp;
+void Push();
+void Pop();
+void DisplayS();
+void EnqueueQ();
+void DequeueQ();
+void DisplayQ();
+void EnqueueCQ();
+void DequeueCQ();
+void DisplayCQ();
 void main()
 {
-    head1=NULL;
-    head2=NULL;
-    head3=NULL;
-    int i=0,j=0,t1,t2,ch;
-    do{
-    printf("\nMENU\n");
-    printf("1.Enter Polynomial 1 & Display\n");
-    printf("2.Enter Polynomial 2 & Display\n");
-    printf("3.Perform Polynomial Addition\n");
-    printf("3.Perform Polynomial Multiplication\n");
-    printf("5.EXIT\n");
-    printf("Enter the choice\n");
-    scanf("%d",&ch);
-    switch(ch)
-    {
-     case 1:
-     {
-         printf("\nEnter the no. of terms of polynomial 1\n");
-        scanf("%d",&t1);
-        printf("Enter Polynomial 1\n");
-        while(i<t1)
-        {
-        
-        p=(struct node*)malloc(sizeof(struct node));
-        printf("Enter the coefficient\n");
-        scanf("%d",&p->coeff);
-        printf("Enter the exponent\n");
-        scanf("%d",&p->expo);
-        p->next=NULL;
-        if(head1==NULL)
-        {
-            head1=p;
-            tail1=p;
-        }
-        else
-        {
-            tail1->next=p;
-            tail1=p;
-        }
-        i++;
-        }
-        p=head1;
-        printf("Polynomial 1:\n");
-        while(p!=NULL)
-        {
-        printf("%dx^%d\t",p->coeff,p->expo);
-        p=p->next;
-        }
-        break;
-     }
-     case 2:
-     {
-        printf("\nEnter the no. of terms of polynomial 2\n");
-        scanf("%d",&t2);
-        printf("Enter Polynomial 2\n");
-        while(j<t2)
-        {
-        
-        q=(struct node*)malloc(sizeof(struct node));
-        printf("Enter the coefficient\n");
-        scanf("%d",&q->coeff);
-        printf("Enter the exponent\n");
-        scanf("%d",&q->expo);
-        q->next=NULL;
-        if(head2==NULL)
-        {
-            head2=q;
-            tail2=q;
-        }
-        else
-        {
-            tail2->next=q;
-            tail2=q;
-        }
-        j++;
-        }
-        q=head2;
-        printf("Polynomial 2:\n");
-        while(q!=NULL)
-        {
-        printf("%dx^%d\t",q->coeff,q->expo);
-        q=q->next;
-        } 
-        break;
-     }
-     case 3:
-     {
-        while(p!=NULL && q!=NULL)
-        {
-        r=(struct node*)malloc(sizeof(struct node));
-        if(head3==NULL)
-        {
-            head3=r;
-            tail3=r;
-        }
-        else
-        {
-            tail3->next=r;
-            tail3=r;
-        }
-        if(p->expo>q->expo)
-        {
-            r->expo=p->expo;
-            r->coeff=p->coeff;
-            p=p->next;
-        }
-        else if(p->expo<q->expo)
-        {
-            r->expo=q->expo;
-            r->coeff=q->coeff;
-            q=q->next;
-        }
-        else
-        {
-            if((p->coeff+q->coeff)!=0)
-            {
-                r->expo=p->expo;
-                r->coeff=p->coeff+q->coeff;
-            }
-            p=p->next;
-            q=q->next;
-        }
-    }
-    while(p!=NULL)
-    {
-        r=(struct node*)malloc(sizeof(struct node));
-        if(head3==NULL)
-        {
-            head3=r;
-            tail3=r;
-        }
-        else
-        {
-            tail3->next=r;
-            tail3=r;
-        }
-        r->expo=p->expo;
-        r->coeff=p->coeff;
-        p=p->next;
-    }
-
-    while(q!=NULL)
-    {
-        r=(struct node*)malloc(sizeof(struct node));
-        if(head3==NULL)
-        {
-            head3=r;
-            tail3=r;
-        }
-        else
-        {
-            tail3->next=r;
-            tail3=r;
-        }
-        r->expo=q->expo;
-        r->coeff=q->coeff;
-        q=q->next;
-    }
-    r=head3;
-    while(r!=NULL)
-        {
-        ptr=r->next;
-        while(ptr!=NULL)
-        {
-            if(r->expo==ptr->expo)
-            {
-                r->coeff=r->coeff+ptr->coeff;
-                ptr->coeff=0;
-            }
-            ptr=ptr->next;
-        }
-        r=r->next;
-        }
-        r=head3;
-        ptr=head3;
-        printf("\nThe resultant polynomial:\n");
-        while(r!=NULL)
-        {
-        if(r->coeff!=0)
-        {
-            printf("%dx^%d",r->coeff,r->expo);
-            if(r->next!=NULL)
-            printf("+");
-        }
-            r=r->next;
-        }
-       break;
-
-     }
-     case 4:
-     {
-        p=head1;
-        while(p!=NULL)
-        {
-            q=head2;
-            while(q!=NULL)
-            {
-            r=(struct node*)malloc(sizeof(struct node));
-            if(head3==NULL)
-            {
-                head3=r;
-                tail3=r;
-            }
-            else
-            {
-                tail3->next=r;
-                tail3=r;
-            }
-            r->coeff=p->coeff*q->coeff;
-            r->expo=p->expo+q->expo;
-            q=q->next;
-            }
-        p=p->next;
-        }
-        r=head3;
-        while(r!=NULL)
-        {
-        ptr=r->next;
-        while(ptr!=NULL)
-        {
-            if(r->expo==ptr->expo)
-            {
-                r->coeff=r->coeff+ptr->coeff;
-                ptr->coeff=0;
-            }
-            ptr=ptr->next;
-        }
-        r=r->next;
-        }
-        r=head3;
-        ptr=head3;
-        printf("\nThe resultant polynomial:\n");
-        while(r!=NULL)
-        {
-        if(r->coeff!=0)
-        {
-            printf("%dx^%d",r->coeff,r->expo);
-            if(r->next!=NULL)
-            printf("+");
-        }
-            r=r->next;
-        }
-     break;
-    }
-    case 5:
-    {
-        printf("Exiting Program\n");
-        break;
-    }
-    }
-    }
-    while(ch!=5);
+    int choice=-1,ch=-1;
+    do
+    {
+       printf("\nMENU\n");
+       printf("1.Stack\t2.Linear Queue\t3.Circular Queue\t4.Exit\n");
+       printf("Enter choice\n");
+       scanf("%d",&choice);
+       switch(choice)
+       {
+           case 1:
+           {
+            top=NULL;
+            ch=-1;
+            do{
+           printf("\nChoose the operation to be performed in the stack\n");
+           printf("1.Push\t2.Pop\t3.Display\t4.Exit\n");
+           printf("Enter choice\n");
+           scanf("%d",&ch);
+           switch(ch)
+           {
+           case 1:
+           {
+               Push();
+               break;
+           }
+           case 2:
+           {
+               Pop();
+               break;
+           }
+            case 3:
+           {
+               DisplayS();            
+               break;
+           }
+           case 4:
+           {
+               printf("\nExiting Stcak Operation\n");
+               break;
+           }
+           default:
+           {
+               printf("\nINVALID CHOICE\n");
+               break;
+           }
+           }
+           }
+           while(ch!=4);
+           break;
+           }
+           case 2:
+           {
+            front=NULL;
+            rear=NULL;
+            ch=-1;
+            do{
+           printf("\nChoose the operation to be performed in the linear queue\n");
+           printf("1.Enqueue\t2.Dequeue\t3.Display\t4.Exit\n");
+           printf("Enter choice\n");
+           scanf("%d",&ch);
+           switch(ch)
+           {
+           case 1:
+           {
+               EnqueueQ();
+               break;
+           }
+           case 2:
+           {
+               DequeueQ();
+               break;
+           }
+           case 3:
+           {
+                DisplayQ();
+                break;
+           }
+           case 4:
+           {
+               printf("\nExiting Queue Operation\n");
+               break;
+           }
+           default:
+           {
+               printf("\nINVALID CHOICE\n");
+               break;
+           }
+           }
+           }
+           while(ch!=4);
+           break;
+           }
+           
+           
+           case 3:
+           {
+            front=NULL;
+            rear=NULL;
+            ch=-1;
+            do{
+           printf("\nChoose the operation to be performed in the circular queue\n");
+           printf("1.Enqueue\t2.Dequeue\t3.Display\t4.Exit\n");
+           printf("Enter choice\n");
+           scanf("%d",&ch);
+           switch(ch)
+           {
+           case 1:
+           {
+               EnqueueCQ();
+               break;
+           }
+           case 2:
+           {
+               DequeueCQ();
+               break;
+           }
+           case 3:
+           {
+                DisplayCQ();
+                break;
+           }
+           case 4:
+           {
+               printf("\nExiting Circular Queue Operation\n");
+               break;
+           }
+           default:
+           {
+               printf("\nINVALID CHOICE\n");
+               break;
+           }
+           }
+           }
+           while(ch!=4);
+           break;
+           }
+           case 4:
+           {
+                printf("\nExiting Linked List program");
+                break;
+           }
+           default:
+           {
+               printf("\nINVALID CHOICE");
+               break;
+           }
+       }
+    }
+    while(choice!=4);
 }
+void Push()
+{
+    p=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data\n");
+    scanf("%d",&p->data);
+    if(top==NULL)
+    p->next=NULL;
+    else
+    p->next=top;
+    top=p;
+}
+void Pop()
+{
+    if(top==NULL)
+    printf("Stack is Empty");
+    else
+    {
+        top=top->next;
+        free (p);
+    }
+}
+void DisplayS()
+{
+    if(top==NULL)
+    printf("Stack is Empty\n");
+    else
+    {
+    temp=top;
+    printf("The stack is:\n");
+    while(temp!=NULL)
+    {
+        printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+    }
+}
+void EnqueueQ()
+{
+    p=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data\n");
+    scanf("%d",&p->data);
+    p->next=NULL;
+    if(front==NULL && rear==NULL)
+    {
+        front=p;
+        rear=p;
+    }
+    else
+    {
+        rear->next=p;
+        rear=p;
+    }
+}
+void DequeueQ()
+{
+    if(front==NULL)
+    printf("Queue is Empty");
+    else if(front==rear)
+    {
+        front=NULL;
+        rear=NULL;
+    }
+    else
+    {
+        temp=front;
+        front=temp->next;
+        free(temp);
+    }
+}
+void DisplayQ()
+{
+    if(front==NULL && rear==NULL)
+    printf("Queue is Empty");
+    else
+    {
+        temp=front;
+        printf("The Linear Queue is:\n");
+        while(temp!=NULL)
+        {
+                printf("%d\t",temp->data);
+                temp=temp->next;
+        }
+    }
+}
+void EnqueueCQ()
+{
+    p=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data\n");
+    scanf("%d",&p->data);
+    if(front==NULL && rear==NULL)
+    {
+        front=p;
+        rear=p;
+        rear->next=p;
+    }
+    else
+    {
+        rear->next=p;
+        rear=p;
+        p->next=front;
+    }
+}
+void DequeueCQ()
+{
+    if(front==NULL && rear==NULL)
+    printf("Queue is Empty");
+    else if(front==rear)
+    {
+        front=NULL;
+        rear=NULL;
+        free(p);
+    }
+    else
+    {
+        temp=front;
+        front=temp->next;
+        free(temp);
+        rear->next=front;
+    }
+}
+void DisplayCQ()
+{
+    if(front==NULL && rear==NULL)
+    printf("Queue is Empty");
+    else
+    {
+        temp=front;
+        printf("The Circular Queue is:\n");
+        while(temp!=rear->next)
+        {
+                printf("%d\t",temp->data);
+                temp=temp->next;
+        }
+    }
+}
+
