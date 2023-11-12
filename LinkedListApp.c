@@ -295,11 +295,12 @@ void DisplayCQ()
     {
         temp=front;
         printf("The Circular Queue is:\n");
-        while(temp!=rear->next)
+        while(front!=temp->next)
         {
                 printf("%d\t",temp->data);
                 temp=temp->next;
         }
+        printf("%d\t",temp->data);
     }
 }
 
