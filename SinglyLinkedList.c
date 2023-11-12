@@ -29,7 +29,7 @@ void main()
            {
                insertatend();
                break;
-           } 
+           }
            case 2:
            {
                insertatbeginning();
@@ -62,7 +62,7 @@ void main()
            }
            case 8:
            {
-                printf("Exiting Linked List program");
+                printf("Exiting Linked List program\n");
                 break;
            }
            default:
@@ -130,7 +130,7 @@ void insertafternode(void)
     scanf("%d",&node);
     while(ptr->data!=node)
     {
-      ptr=ptr->next; 
+      ptr=ptr->next;
     }
     p->next=ptr->next;
     ptr->next=p;
@@ -182,3 +182,7 @@ void deletenode(void)
         free(ptr);
     }
 }
+
+
+
+
