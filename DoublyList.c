@@ -19,6 +19,7 @@ void displaybackward(void);
 void main()
 {
     int choice,ch;
+    printf("Name:Kesiya Mariam Reji\nBranch:CS-B\nRoll No.54\n");
     head=NULL;
     do
     {
@@ -136,7 +137,7 @@ void main()
     while(choice!=4);
 }
 void insertatend(void)
-{   
+{  
     p=(struct node*)malloc(sizeof(struct node));
     printf("Enter the data\n");
     scanf("%d",&p->data);
@@ -268,8 +269,12 @@ void deletenode(void)
     ptr->prev->next=ptr->next;
     ptr->next->prev=ptr->prev;
 }
-void displayforward(void)
+  void displayforward(void)
 {
+    if(head==NULL)
+    printf("List is Empty");
+    else
+    {
     ptr=head;
     printf("The linked list is\n");
     while(ptr!=NULL)
@@ -277,9 +282,14 @@ void displayforward(void)
         printf("%d\t",ptr->data);
         ptr=ptr->next;
     }
+    }
 }
 void displaybackward(void)
 {
+    if(head==NULL)
+    printf("List is Empty");
+    else
+    {
     ptr=tail;
     printf("The linked list is\n");
     while(ptr!=NULL)
@@ -287,9 +297,5 @@ void displaybackward(void)
         printf("%d\t",ptr->data);
         ptr=ptr->prev;
     }
+    }
 }
-
-
-
-
-
