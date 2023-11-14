@@ -93,12 +93,17 @@ void insertatend(void)
 }
 void display(void)
 {
+    if(head==NULL)
+    printf("List is Empty\n");
+    else
+    {
     ptr=head;
     printf("The linked list is\n");
     while(ptr!=NULL)
     {
         printf("%d\t",ptr->data);
         ptr=ptr->next;
+    }
     }
 }
 void insertatbeginning(void)
