@@ -19,7 +19,6 @@ void displaybackward(void);
 void main()
 {
     int choice,ch;
-    printf("Name:Kesiya Mariam Reji\nBranch:CS-B\nRoll No.54\n");
     head=NULL;
     do
     {
