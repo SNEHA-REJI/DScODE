@@ -61,7 +61,7 @@ break;
 }
 case 3:
 {
-printf("Displaying POrder traversal\n");
+printf("Displaying PreOrder traversal\n");
 preorder(root);
 break;
 }
