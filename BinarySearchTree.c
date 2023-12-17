@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 struct node
@@ -124,12 +125,12 @@ else if (itemd > root->data)
 root->right=deletenode(root->right,itemd);
 else
 {
-if (root->left==NULL) 
+if (root->left==NULL)
 {
 struct node *temp = root->right;
 free(root);
 return temp;
-} 
+}
 else if(root->right==NULL)
 {
 struct node *temp=root->left;
@@ -139,6 +140,7 @@ return temp;
 struct node *temp=inordersuc(root->right);
 root->data=temp->data;
 root->right = deletenode(root->right,temp->data);
+root->left=deletenode(root->left,temp->data);
 }
 return root;
 }
@@ -156,20 +158,20 @@ inorder(root->left);
 printf("%d\t",root->data);
 inorder(root->right);
 }
-void postorder(struct node *root)
-{
-if(root==NULL)
-return;
-printf("%d\t",root->data);
-postorder(root->left);
-postorder(root->right);
-}
 void preorder(struct node *root)
 {
 if(root==NULL)
 return;
+printf("%d\t",root->data);
 preorder(root->left);
 preorder(root->right);
+}
+void postorder(struct node *root)
+{
+if(root==NULL)
+return;
+postorder(root->left);
+postorder(root->right);
 printf("%d\t",root->data);
 }
 struct node* searchnode(struct node *root,int items)
@@ -180,5 +182,9 @@ if (items < root->data)
 return searchnode(root->left,items);
 return searchnode(root->right,items);
 }
+
+
+
+
 
 
