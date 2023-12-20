@@ -2,14 +2,15 @@
 #include <stdlib.h>
 int hashTable[100]; 
 int linearProbe(int key,int size);
-int quadraticProbe(int key,int size,int i);
+int quadraticProbe(int key,int size);
 void displayHashTable(int size);
 void main() 
 {
-    int size,i=0;
+    int size;
     printf("Name: Kesiya Mariam Reji\nBranch: CS-B\nRoll No.: 54\n");
     printf("Enter the size of the hash table: ");
     scanf("%d", &size);
+    printf("Initializing all values of the hash table as -1\n");
     for (int i=0;i<size;i++) 
     {
         hashTable[i]=-1;
@@ -29,9 +30,9 @@ void main()
             case 1:
             {
                 int s;
-                printf("Enter elements to be inserted through Linear Probing");
+                printf("Enter number of elements to be inserted: ");
                 scanf("%d",&s);
-                if(s<size)
+                if(s<=size)
                 {
                 for(int i=0;i<s;i++)
                 {
@@ -47,15 +48,15 @@ void main()
             case 2:
             {
                 int s;
-                printf("Enter elements to be inserted through Linear Probing");
+                printf("Enter number of elements to be inserted: ");
                 scanf("%d",&s);
-                if(s<size)
+                if(s<=size)
                 {
                 for(int i=0;i<s;i++)
                 {
                 printf("Enter key to insert: ");
                 scanf("%d",&key);
-                quadraticProbe(key,size,i);
+                quadraticProbe(key,size);
                 }
                 }
                 else
@@ -65,6 +66,10 @@ void main()
             case 3:
             {
                 displayHashTable(size);
+                for (int i=0;i<size;i++) 
+                {
+                    hashTable[i]=-1;
+                }
                 break;
             }
             case 4:
@@ -89,10 +94,12 @@ int linearProbe(int key,int size)
         index=(index+1)%size;
     }
     hashTable[index]=key;
+    return index;
 }
 
-int quadraticProbe(int key,int size,int i) 
+int quadraticProbe(int key,int size) 
 {
+    int i=0;
     int index=(key+i*i)%size;
     while(hashTable[index]!=-1)
     {
@@ -100,6 +107,7 @@ int quadraticProbe(int key,int size,int i)
         index=(key+i*i)%size;
     }
     hashTable[index]=key;
+    return index;
 }
 void displayHashTable(int size) 
 {
@@ -108,4 +116,5 @@ void displayHashTable(int size)
     {
         printf("%d: %d\n",i,hashTable[i]);
     }
+    printf("Hash Table becomes empty");
 }
