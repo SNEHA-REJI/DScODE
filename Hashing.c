@@ -7,7 +7,6 @@ void displayHashTable(int size);
 void main() 
 {
     int size;
-    printf("Name: Kesiya Mariam Reji\nBranch: CS-B\nRoll No.: 54\n");
     printf("Enter the size of the hash table: ");
     scanf("%d", &size);
     printf("Initializing all values of the hash table as -1\n");
