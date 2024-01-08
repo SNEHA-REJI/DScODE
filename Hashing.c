@@ -87,10 +87,12 @@ void main()
 
 int linearProbe(int key,int size) 
 {
+    int i=0;
     int index=key%size;
     while(hashTable[index]!=-1)
     {
-        index=(index+1)%size;
+        i++;
+        index=(key+i)%size;
     }
     hashTable[index]=key;
     return index;
@@ -99,7 +101,7 @@ int linearProbe(int key,int size)
 int quadraticProbe(int key,int size) 
 {
     int i=0;
-    int index=(key+i*i)%size;
+    int index=key%size;
     while(hashTable[index]!=-1)
     {
         i++;
