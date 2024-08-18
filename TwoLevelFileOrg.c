@@ -179,7 +179,7 @@ void display_directories() {
     }
     struct directory *dir_ptr = root;
     while (dir_ptr != NULL) {
-        printf("%s->", dir_ptr->dirname);
+        printf("root/%s->", dir_ptr->dirname);
         display_files(dir_ptr);
         dir_ptr = dir_ptr->next;
     }
