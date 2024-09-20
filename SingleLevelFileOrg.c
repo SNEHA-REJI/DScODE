@@ -1,3 +1,6 @@
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -61,6 +64,10 @@ void create_file() {
     char f_name[10];
     printf("Enter the filename: ");
     scanf("%s", f_name);
+    if (strchr(f_name, '.') == NULL) {
+        printf("Invalid filename! A valid filename must contain an extension.(e.g., 'file.txt').\n");
+        return;
+    }
     ptr = head;
     while (ptr != NULL) {
         if (strcmp(ptr->filename, f_name) == 0) {
@@ -72,7 +79,6 @@ void create_file() {
     p = (struct file*)malloc(sizeof(struct file));
     strcpy(p->filename, f_name);
     p->next = NULL;
-
     if (head == NULL) {
         head = p;
         tail = p;
