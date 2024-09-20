@@ -99,6 +99,13 @@ void create_file() {
     char f_name[10];
     printf("Enter the filename: ");
     scanf("%s", f_name);
+   
+    // Check if the filename contains a dot
+    if (strchr(f_name, '.') == NULL) {
+        printf("Invalid filename! A valid filename must contain an exception.(e.g., 'file.txt').\n");
+        return;
+    }
+
     struct file *file_ptr = dir->files;
     while (file_ptr != NULL) {
         if (strcmp(file_ptr->filename, f_name) == 0) {
