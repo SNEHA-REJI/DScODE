@@ -26,54 +26,58 @@ void main() {
     snprintf(text_header, sizeof(text_header), "T^%06X", text_rec_addr);
 while (strcmp(opcode, "END") != 0) {
         fscanf(intermediate_ptr, "%s %d %s %s %s", loc, &length, label, opcode, operand);
-        objc_len = 0;
-        strcpy(temp_objc, "");
-        int opcode_found = 0;
-        fseek(optab_ptr, 0, SEEK_SET);
-      while (fscanf(optab_ptr, "%s %s", opc, val) != EOF) {
-            char newopc[20] = "+";
-            strcat(newopc, opc);
-            if (strcmp(opcode, opc) == 0 || strcmp(opcode, newopc) == 0) {
-                int operand_found = 0;
-                fseek(symtab_ptr, 0, SEEK_SET);
-                while (fscanf(symtab_ptr, "%s %s", sym_name, sym_addr) != EOF) {
-                    if (strcmp(operand, sym_name) == 0) {
-                        snprintf(temp_objc, sizeof(temp_objc), "^%s%s", val, sym_addr);
-                        objc_len = 3;
-                        operand_found = 1;
-                        break;
-                    }
-                }
-                if (operand_found) break;
-                opcode_found = 1;
-            }
-        }
-        if (strcmp(opcode, "BYTE") == 0) {
-            strcpy(temp_objc, "^");
-            for (int i = 2; i < strlen(operand) - 1; i++) {
-                char hex_val[3];
-                snprintf(hex_val, sizeof(hex_val), "%02X", operand[i]);
-                strcat(temp_objc, hex_val);
-                objc_len++;
-            }
-            objc_len--;
-        }
-        if (strcmp(opcode, "WORD") == 0) {
-            snprintf(temp_objc, sizeof(temp_objc), "^%06X", (int)strtol(operand, NULL, 10));
-            objc_len = 3;
-        }
-        if (text_rec_len + objc_len <= 9) {
-            text_rec_len += objc_len;
-            strcat(obj_code, temp_objc);
-        } else {
-            printf("%s^%02X%s\n", text_header, text_rec_len, obj_code);
-            fprintf(object_ptr, "%s^%02X%s\n", text_header, text_rec_len, obj_code);
-            text_rec_addr += text_rec_len;
-            text_rec_len = objc_len;
-            snprintf(text_header, sizeof(text_header), "T^%06X", text_rec_addr);
-            strcpy(obj_code, temp_objc);
-        }
+  objc_len = 0;
+  strcpy(temp_objc, "");
+  int opcode_found = 0;
+  fseek(optab_ptr, 0, SEEK_SET);
+while (fscanf(optab_ptr, "%s %s", opc, val) != EOF) 
+{
+    char newopc[20] = "+";
+    strcat(newopc, opc);
+    if (strcmp(opcode, opc) == 0 || strcmp(opcode, newopc) == 0) {
+      int operand_found = 0;
+      fseek(symtab_ptr, 0, SEEK_SET);
+while (fscanf(symtab_ptr, "%s %s", sym_name, sym_addr) != EOF)
+{
+   if (strcmp(operand, sym_name) == 0) 
+   {
+    snprintf(temp_objc, sizeof(temp_objc), "^%s%s", val, sym_addr);
+     objc_len = 3;
+     operand_found = 1;
+     break;
     }
+ }
+ if (operand_found) break;
+ opcode_found = 1;
+} }
+if (strcmp(opcode, "BYTE") == 0) {
+strcpy(temp_objc, "^");
+for (int i = 2; i < strlen(operand) - 1; i++) 
+{
+   char hex_val[3];
+   snprintf(hex_val, sizeof(hex_val), "%02X", operand[i]);
+   strcat(temp_objc, hex_val);
+   objc_len++;
+}
+objc_len--;
+}
+if (strcmp(opcode, "WORD") == 0) {
+snprintf(temp_objc, sizeof(temp_objc), "^%06X", (int)strtol(operand, NULL, 10));
+  objc_len = 3;
+ }
+  if (text_rec_len + objc_len <= 9) {
+  text_rec_len += objc_len;
+  strcat(obj_code, temp_objc);
+} 
+else {
+  printf("%s^%02X%s\n", text_header, text_rec_len, obj_code);
+  fprintf(object_ptr, "%s^%02X%s\n", text_header, text_rec_len, obj_code);
+  text_rec_addr += text_rec_len;
+  text_rec_len = objc_len;
+  snprintf(text_header, sizeof(text_header), "T^%06X", text_rec_addr);
+  strcpy(obj_code, temp_objc);
+  }
+}
   printf("%s^%02X%s\n", text_header, text_rec_len, obj_code);
     fprintf(object_ptr, "%s^%02X%s\n", text_header, text_rec_len, obj_code);
     printf("E^%06X\n", (int)strtol(start_addr, NULL, 16));
