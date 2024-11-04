@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 void main() {
-    printf("Name: Kesiya Mariam Reji\tBranch: CS-B\tRoll No.: 54\n");
     int prog_len, length, objc_len, text_rec_len = 0, text_rec_addr;
     char start_addr[10], loc[10], label[10], opcode[10], operand[10];
     char opc[10], val[10], sym_name[10], sym_addr[10];
