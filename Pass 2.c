@@ -11,31 +11,26 @@ void main() {
     FILE *symtab_ptr = fopen("symtab.txt", "r");
     FILE *size_ptr = fopen("prgsize.txt", "r");
     FILE *object_ptr = fopen("pass2_objectcode.txt", "w");
-
-    if (!intermediate_ptr || !optab_ptr || !symtab_ptr || !size_ptr || !object_ptr) {
+   if (!intermediate_ptr || !optab_ptr || !symtab_ptr || !size_ptr || !object_ptr) {
         printf("Error: Could not open one or more files.\n");
         exit(1);
     }
-
-    fscanf(intermediate_ptr, "%s %d %s %s %s", loc, &length, label, opcode, operand);
+   fscanf(intermediate_ptr, "%s %d %s %s %s", loc, &length, label, opcode, operand);
     if (strcmp(opcode, "START") == 0) {
         strcpy(start_addr, operand);
         text_rec_addr = (int)strtol(start_addr, NULL, 16);
         fscanf(size_ptr, "%x", &prog_len);
     }
-
-    printf("H^%s^%06X^%06X\n", label, (int)strtol(start_addr, NULL, 16), prog_len);
+   printf("H^%s^%06X^%06X\n", label, (int)strtol(start_addr, NULL, 16), prog_len);
     fprintf(object_ptr, "H^%s^%06X^%06X\n", label, (int)strtol(start_addr, NULL, 16), prog_len);
     snprintf(text_header, sizeof(text_header), "T^%06X", text_rec_addr);
-
-    while (strcmp(opcode, "END") != 0) {
+while (strcmp(opcode, "END") != 0) {
         fscanf(intermediate_ptr, "%s %d %s %s %s", loc, &length, label, opcode, operand);
         objc_len = 0;
         strcpy(temp_objc, "");
         int opcode_found = 0;
         fseek(optab_ptr, 0, SEEK_SET);
-
-        while (fscanf(optab_ptr, "%s %s", opc, val) != EOF) {
+      while (fscanf(optab_ptr, "%s %s", opc, val) != EOF) {
             char newopc[20] = "+";
             strcat(newopc, opc);
             if (strcmp(opcode, opc) == 0 || strcmp(opcode, newopc) == 0) {
@@ -79,12 +74,10 @@ void main() {
             strcpy(obj_code, temp_objc);
         }
     }
-   
-    printf("%s^%02X%s\n", text_header, text_rec_len, obj_code);
+  printf("%s^%02X%s\n", text_header, text_rec_len, obj_code);
     fprintf(object_ptr, "%s^%02X%s\n", text_header, text_rec_len, obj_code);
     printf("E^%06X\n", (int)strtol(start_addr, NULL, 16));
     fprintf(object_ptr, "E^%06X\n", (int)strtol(start_addr, NULL, 16));
-
     fclose(intermediate_ptr);
     fclose(optab_ptr);
     fclose(symtab_ptr);
