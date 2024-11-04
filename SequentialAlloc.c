@@ -128,22 +128,3 @@ int find_contiguous_blocks(int length) {
     }
     return -1;  // No sufficient contiguous blocks found
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
