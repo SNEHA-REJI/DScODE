@@ -7,15 +7,16 @@ int main()
    char label[30], opcode[30],operand[30];
    FILE *input_ptr, *optab_ptr,
 *symtab_ptr, *intermediate_ptr, *size_ptr;
-input_ptr = fopen("input.txt", "r");
-    symtab_ptr = fopen("symtab.txt", "w");
-    intermediate_ptr = fopen("intermediatefile.txt", "w");
-    size_ptr = fopen("prgsize.txt", "w");
-if (input_ptr == NULL) {
-        printf("Error: Could not open input file.\n");
-        return 1;
-    }
-while (fscanf(input_ptr, "%s %s %s", label, opcode, operand) != EOF)
+input_ptr=fopen("input.txt", "r");
+symtab_ptr=fopen("symtab.txt", "w");
+intermediate_ptr=fopen("intermediatefile.txt", "w");
+size_ptr=fopen("prgsize.txt", "w");
+if(input_ptr==NULL) 
+{
+ printf("Error: Could not open input file.\n");
+ return 1;
+}
+while(fscanf(input_ptr, "%s %s %s", label, opcode, operand) != EOF)
     {
         if (strcmp(opcode, "START") == 0)
         {
