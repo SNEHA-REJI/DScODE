@@ -3,9 +3,10 @@
 #include <stdlib.h>
 int main()
 {
-    int start_addr = 0, locctr = 0, length = 0;
-    char label[30], opcode[30], operand[30];
-    FILE *input_ptr, *optab_ptr, *symtab_ptr, *intermediate_ptr, *size_ptr;
+   int start_addr=0, locctr=0, length=0;
+   char label[30], opcode[30],operand[30];
+   FILE *input_ptr, *optab_ptr,
+*symtab_ptr, *intermediate_ptr, *size_ptr;
 input_ptr = fopen("input.txt", "r");
     symtab_ptr = fopen("symtab.txt", "w");
     intermediate_ptr = fopen("intermediatefile.txt", "w");
@@ -69,7 +70,7 @@ int is_format_4 = 0;
             if (strcmp(opcode, "BYTE") == 0)
             {
                 if (operand[0] == 'X')
-                    length = (strlen(operand) - 3) / 2;
+                length = (strlen(operand) - 3) / 2;
                 if (operand[0] == 'C')
                     length = strlen(operand) - 3;
             }
