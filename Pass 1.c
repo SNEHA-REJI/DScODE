@@ -3,7 +3,6 @@
 #include <stdlib.h>
 int main()
 {
-printf("Name:Kesiya Mariam Reji\tBranch:CS-B\tRoll no.:54\n");
     int start_addr = 0, locctr = 0, length = 0;
     char label[30], opcode[30], operand[30];
     FILE *input_ptr, *optab_ptr, *symtab_ptr, *intermediate_ptr, *size_ptr;
