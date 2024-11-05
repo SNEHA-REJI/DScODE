@@ -79,13 +79,13 @@ int count_free_blocks(int total_blocks) {
     return free_count;
 }
 void generate_random_blocks(int *blocks, int count, int total_blocks) {
-    int allocated[TOTAL_BLOCKS] = {0}; // To track already allocated blocks
+    
     int block;
     for (int i = 0; i < count; i++) {
         do {
             block = rand() % total_blocks;  // Generate a random block within limits
-        } while (allocated[block] || memory[block] != 0);  // Ensure it's free and not already allocated
-        allocated[block] = 1;  // Mark this block as allocated
+        } while ( memory[block] != 0);  // Ensure it's free and not already allocated
+        
         blocks[i] = block;  // Assign the block
         memory[block] = 1;  // Mark block as allocated
     }
@@ -154,7 +154,4 @@ void display_files() {
         printf("\n");
         ptr = ptr->next;
     }
-}
-void free_block(int block) {
-    memory[block] = 0;  // Mark block as free
 }
